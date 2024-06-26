@@ -1,9 +1,17 @@
-import React from 'react'
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import LoginPage from "./Pages/LoginPage";
+import SignupPage from "./Pages/SignupPage";
+import Dashboard from "./Pages/Dashboard";
 
 function App() {
   return (
-    <div>App</div>
-  )
+    <Routes>
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/" element={<LoginPage />} />
+      <Route path="/signup" element={<SignupPage />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;

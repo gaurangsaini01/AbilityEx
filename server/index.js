@@ -1,8 +1,17 @@
 const express = require("express");
-const app = express();
+const connectWithDB = require("./config/database")
 require("dotenv").config();
 
-const PORT = 4000 || process.env.PORT
+const app = express();
+
+//middleware to parse JSON bodies
+app.use(express.json());
+//Connecting with DB
+connectWithDB();
+
+const PORT = process.env.PORT
+
+//Starting server 
 app.listen(PORT,()=>{
     console.log(`Running succesfully on PORT NO. ${PORT}`)
 })
