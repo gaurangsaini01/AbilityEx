@@ -1,16 +1,29 @@
-import React from "react";
+import {React,useState} from "react";
 import { Button } from "@mui/material";
-function SignupStep1({
-  handleBack,
-  handleNext,
-  activeStep,
-  steps,
-  formData,
-  changeHandler,
-}) {
+import toast from "react-hot-toast";
+import { LuEye } from "react-icons/lu";
+import { LuEyeOff } from "react-icons/lu";
+function SignupStep1({ handleNext, formData, changeHandler }) {
+  const [showPassword, setShowPassword] = useState(false);
+
+  function errorHandler() {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (
+      !formData.email ||
+      !formData.password ||
+      !formData.firstName ||
+      !formData.lastName
+    ) {
+      toast.error("Missing Fields");
+    } else if (!emailRegex.test(formData.email)) {
+      toast.error("Invalid Email");
+    } else {
+      handleNext();
+    }
+  }
   return (
     <div className="flex flex-col gap-6 p-4 w-full">
-      <h1 className="font-bold">Personal Information</h1>
+      <h1 className="font-bold">Personal Information (Mandatory)</h1>
       <p className="text-[12px] text-gray-500 font-semibold">
         Any information about the registration step goes here cloud system or
         cloud computing technology refers to the computing components.
@@ -41,8 +54,8 @@ function SignupStep1({
             >
               LAST NAME
             </label>
-            <input 
-            value={formData.lastName}
+            <input
+              value={formData.lastName}
               onChange={changeHandler}
               autoComplete="off"
               type="text"
@@ -55,28 +68,12 @@ function SignupStep1({
         <div>
           <label
             className="block uppercase font-semibold text-gray-500 mb-2"
-            htmlFor="password"
-          >
-            PASSWORD
-          </label>
-          <input value={formData.password}
-            onChange={changeHandler}
-            autoComplete="off"
-            type="text"
-            id="password"
-            className="input-class"
-            name="password"
-          />
-        </div>
-        <div>
-          <label
-            className="block uppercase font-semibold text-gray-500 mb-2"
             htmlFor="email"
           >
             EMAIL
           </label>
-          <input 
-          value={formData.email}
+          <input
+            value={formData.email}
             onChange={changeHandler}
             autoComplete="off"
             type="email"
@@ -85,25 +82,43 @@ function SignupStep1({
             name="email"
           />
         </div>
-        <div className="flex">
-          {activeStep !== 0 && (
-            <Button
-              variant="contained"
-              onClick={handleBack}
-              sx={{ mt: 1, mr: 1 }}
-            >
-              Back
-            </Button>
-          )}
-          {activeStep !== steps.length && (
-            <Button
-              variant="contained"
-              onClick={handleNext}
-              sx={{ mt: 1, mr: 1 }}
-            >
-              Continue
-            </Button>
-          )}
+        <div className="relative">
+          <label
+            className="block uppercase font-semibold text-gray-500 mb-2"
+            htmlFor="password"
+          >
+            PASSWORD
+          </label>
+          <input
+            value={formData.password}
+            onChange={changeHandler}
+            autoComplete="off"
+            type={showPassword ? "text" : "password"}
+            id="password"
+            className="input-class"
+            name="password"
+          />
+          {showPassword && (
+                  <LuEyeOff
+                    className="absolute right-[3%] cursor-pointer top-[60%] text-gray-500"
+                    onClick={() => setShowPassword(false)}
+                  />
+                )}
+                {!showPassword && (
+                  <LuEye
+                    className="absolute right-[3%] cursor-pointer top-[60%] text-gray-500"
+                    onClick={() => setShowPassword(true)}
+                  />
+                )}
+        </div>
+        <div className="mt-2">
+          <Button
+            variant="contained"
+            onClick={errorHandler} //handlenext call kero
+            sx={{ mt: 1, mr: 1 }}
+          >
+            Continue
+          </Button>
         </div>
       </form>
     </div>

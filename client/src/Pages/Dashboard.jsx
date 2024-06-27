@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react'
 import toast from "react-hot-toast"
 import { useNavigate } from 'react-router-dom';
-function Dashboard() {
+import Navbar from '../Components/Navbar';
+function Dashboard({loginStatus}) {
   const navigate = useNavigate();
   useEffect(()=>{
-    if(!localStorage.getItem('token')){
-      toast.error('Signup First')
-      navigate("/signup")
+    if(loginStatus===false){
+      navigate('/')
     }
-  })
+  },[])
   return (
-    <div>Dashboard</div>
+    <div>
+      <Navbar/>
+    </div>
   )
 }
 

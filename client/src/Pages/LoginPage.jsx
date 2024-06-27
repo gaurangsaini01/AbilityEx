@@ -5,7 +5,7 @@ import { LuEyeOff } from "react-icons/lu";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-function LoginPage() {
+function LoginPage({setLoginStatus}) {
   const navigate = useNavigate();
   const [accountType, setAccountType] = useState("personal");
   const [showPassword, setShowPassword] = useState(false);
@@ -19,7 +19,6 @@ function LoginPage() {
       ...formData,
       [e.target.name]: e.target.value,
     });
-    console.log(formData);
   };
   async function submitHandler(e) {
     e.preventDefault();
@@ -35,19 +34,22 @@ function LoginPage() {
               password: formData.password,
               corporateName: formData.corporateName,
             });
-      // console.log(response);
-      localStorage.setItem('token',response.data.token)
+      localStorage.setItem("token", response.data.token);
       toast.success(response.data.message);
+      setLoginStatus(true)
       navigate("/dashboard");
     } catch (err) {
-      console.log(err);
-      toast.error(err.response.data.message)
+      toast.error(err.response.data.message);
     }
   }
   return (
     <div className="flex h-screen">
       <div className="min-w-[50%] relative lg:block hidden">
-        <img src="/meet.jpg" className="h-full w-full object-cover" alt="" />
+        <img
+          src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          className="h-full w-full object-cover"
+          alt=""
+        />
         <div className="text-6xl absolute top-[15%] left-[20%] font-bold text-white">
           Where Skills Are Developed
         </div>

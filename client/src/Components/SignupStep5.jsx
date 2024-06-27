@@ -5,25 +5,22 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 function SignupStep5({
   handleBack,
-  handleNext,
-  activeStep,
-  steps,
   formData,
   changeHandler,
+  setLoginStatus
 }) {
-    const navigate=useNavigate();
+  const navigate = useNavigate();
   async function submitHandler(e) {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:6969/api/v1/signup",
+        import.meta.env.VITE_SIGNUP_API,
         formData
       );
-      console.log(response)
       toast.success("Signup Successfull");
       navigate("/dashboard");
+      setLoginStatus(true)
     } catch (err) {
-      console.log(err);
       toast.error(err.response.data.message);
     }
   }
@@ -34,7 +31,7 @@ function SignupStep5({
         Education level starts from high school all the way to college , make
         sure you enter correct education details !
       </p>
-      <form className="flex flex-col">
+      <form className="flex flex-col" onSubmit={submitHandler}>
         <div>
           <label
             className="block uppercase font-semibold text-gray-500 mb-2"
@@ -104,24 +101,21 @@ function SignupStep5({
           />
         </div>
         <div className="flex">
-          {activeStep !== 0 && (
-            <Button
-              variant="contained"
-              onClick={handleBack}
-              sx={{ mt: 1, mr: 1 }}
-            >
-              Back
-            </Button>
-          )}
-          {activeStep !== steps.length && (
-            <Button
-              variant="contained"
-              onClick={submitHandler}
-              sx={{ mt: 1, mr: 1 }}
-            >
-              Submit
-            </Button>
-          )}
+          <Button
+            variant="contained"
+            onClick={handleBack}
+            sx={{ mt: 1, mr: 1 }}
+          >
+            Back
+          </Button>
+
+          <Button
+            variant="contained"
+            onClick={submitHandler}
+            sx={{ mt: 1, mr: 1 }}
+          >
+            Submit
+          </Button>
         </div>
       </form>
     </div>

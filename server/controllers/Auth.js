@@ -10,7 +10,6 @@ async function signup(req, res) {
       lastName,
       email,
       password,
-      image,
       employeeNumber,
       corporateName,
       department,
@@ -25,6 +24,7 @@ async function signup(req, res) {
       subjectStudied,
     } = req.body;
 
+    console.log('Hasing done')
     //validate data
     if (
       !firstName ||
