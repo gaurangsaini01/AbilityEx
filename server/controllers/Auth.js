@@ -30,12 +30,7 @@ async function signup(req, res) {
       !firstName ||
       !lastName ||
       !email ||
-      !password ||
-      !expertise ||
-      !educationGrade ||
-      !yearGraduate ||
-      !schoolName ||
-      !subjectStudied
+      !password 
     ) {
       return res.status(400).json({
         success: false,

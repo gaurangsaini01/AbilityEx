@@ -17,14 +17,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-//   accountType: {
-//     type: String,
-//     enum: ["personal", "corporate"],
-//     required: true,
-//   },
   image: {
     type: String,
-    required: true,
   },
   corporateName: {
     type:String,
@@ -68,23 +62,19 @@ const userSchema = new mongoose.Schema({
       "health",
       "social",
     ],
-    required: true,
+    default:"marketing"
   },
   educationGrade: {
     type: String,
-    required: true,
   },
   yearGraduate: {
     type: Number,
-    required: true,
   },
   schoolName: {
     type: String,
-    required: true,
   },
   subjectStudied: {
     type: String,
-    required: true,
   },
 });
 
