@@ -1,13 +1,59 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { LuEye } from "react-icons/lu";
+import { LuEyeOff } from "react-icons/lu";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 function LoginPage() {
+  const navigate = useNavigate();
   const [accountType, setAccountType] = useState("personal");
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    corporateName: "",
+  });
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+    console.log(formData);
+  };
+  async function submitHandler(e) {
+    e.preventDefault();
+    try {
+      const response =
+        accountType === "personal"
+          ? await axios.post("http://localhost:6969/api/v1/login", {
+              email: formData.email,
+              password: formData.password,
+            })
+          : await axios.post("http://localhost:6969/api/v1/login", {
+              email: formData.email,
+              password: formData.password,
+              corporateName: formData.corporateName,
+            });
+      // console.log(response);
+      localStorage.setItem('token',response.data.token)
+      toast.success(response.data.message);
+      navigate("/dashboard");
+    } catch (err) {
+      console.log(err);
+      toast.error(err.response.data.message)
+    }
+  }
   return (
     <div className="flex h-screen">
-      <div className="min-w-[50%] border-2">img</div>
-      <div className="w-1/2 flex items-center justify-center bg-[#f9fafa]">
-        <div className="lg:w-[500px]">
+      <div className="min-w-[50%] relative lg:block hidden">
+        <img src="/meet.jpg" className="h-full w-full object-cover" alt="" />
+        <div className="text-6xl absolute top-[15%] left-[20%] font-bold text-white">
+          Where Skills Are Developed
+        </div>
+      </div>
+      <div className="lg:w-1/2 w-full flex items-center justify-center bg-[#f9fafa]">
+        <div className="lg:w-[500px] w-[400px]">
           {/* logo */}
           <div className="flex items-center ">
             <div></div>
@@ -40,40 +86,42 @@ function LoginPage() {
                 Corporate
               </button>
             </div>
-            <form className="flex flex-col gap-6 mt-6">
+            <form className="flex flex-col gap-6 mt-6" onSubmit={submitHandler}>
               {accountType === "corporate" && (
                 <div>
                   <label
-                    htmlFor="corporatename"
+                    htmlFor="corporateName"
                     className="block uppercase font-semibold text-gray-500 mb-2"
                   >
                     corporate name
                   </label>
                   <input
+                    onChange={handleChange}
                     type="text"
                     autoComplete="off"
-                    name="corporatename"
-                    id="corporatename"
+                    name="corporateName"
+                    id="corporateName"
                     className="input-class "
                   />
                 </div>
               )}
               <div>
                 <label
-                  htmlFor="username"
+                  htmlFor="email"
                   className="block uppercase font-semibold text-gray-500 mb-2"
                 >
-                  Username
+                  Username / Email
                 </label>
                 <input
-                  type="text"
+                  onChange={handleChange}
+                  type="email"
                   autoComplete="off"
-                  name="username"
-                  id="username"
+                  name="email"
+                  id="email"
                   className="input-class"
                 />
               </div>
-              <div>
+              <div className="relative">
                 <label
                   htmlFor="password"
                   className="block uppercase font-semibold text-gray-500 mb-2"
@@ -81,12 +129,25 @@ function LoginPage() {
                   Password
                 </label>
                 <input
-                  type="text"
+                  onChange={handleChange}
+                  type={showPassword ? "text" : "password"}
                   autoComplete="off"
                   name="password"
                   id="password"
                   className="input-class"
                 />
+                {showPassword && (
+                  <LuEyeOff
+                    className="absolute right-[3%] cursor-pointer top-[60%] text-gray-500"
+                    onClick={() => setShowPassword(false)}
+                  />
+                )}
+                {!showPassword && (
+                  <LuEye
+                    className="absolute right-[3%] cursor-pointer top-[60%] text-gray-500"
+                    onClick={() => setShowPassword(true)}
+                  />
+                )}
               </div>
               <div className="flex justify-between">
                 <div className="flex items-center gap-2">
@@ -106,11 +167,24 @@ function LoginPage() {
               </div>
               <div className="flex justify-between items-center">
                 <div className="flex flex-col mt-6">
-                    <p className="font-semibold text-[14px] text-gray-500">Don't have an account?</p>
-                    <Link to={"/signup"} className="underline text-[15px] text-[#22a7f1] font-bold">Sign Up</Link>
+                  <p className="font-semibold text-[14px] text-gray-500">
+                    Don't have an account?
+                  </p>
+                  <Link
+                    to={"/signup"}
+                    className="underline text-[15px] text-[#22a7f1] font-bold"
+                  >
+                    Sign Up
+                  </Link>
                 </div>
                 <div>
-                <button className="px-6 py-3 rounded-xl font-semibold text-white hover:scale-95 transition-all duration-200 ease-in-out bg-[#22a7f1]">Login</button>
+                  <button
+                    type="submit"
+                    onSubmit={submitHandler}
+                    className="px-6 py-3 rounded-xl font-semibold text-white hover:scale-95 transition-all duration-200 ease-in-out bg-[#22a7f1]"
+                  >
+                    Login
+                  </button>
                 </div>
               </div>
             </form>
