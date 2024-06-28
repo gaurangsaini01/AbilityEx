@@ -30,11 +30,11 @@ function LoginPage({ loginStatus, setLoginStatus }) {
     try {
       const response =
         accountType === "personal"
-          ? await axios.post("http://localhost:6969/api/v1/login", {
+          ? await axios.post("https://abilityex.onrender.com/api/v1/login", {
               email: formData.email,
               password: formData.password,
             })
-          : await axios.post("http://localhost:6969/api/v1/login", {
+          : await axios.post("https://abilityex.onrender.com/api/v1/login", {
               email: formData.email,
               password: formData.password,
               corporateName: formData.corporateName,

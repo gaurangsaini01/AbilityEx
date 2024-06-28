@@ -9,7 +9,7 @@ const app = express();
 //middleware to parse JSON bodies
 app.use(express.json());
 app.use(cors({
-    origin:'http://localhost:5173'
+    origin:'https://abilityex.netlify.app/'
 }))
 //Connecting with DB
 connectWithDB();

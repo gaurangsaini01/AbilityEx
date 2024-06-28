@@ -14,7 +14,7 @@ function SignupStep5({
     e.preventDefault();
     try {
       const response = await axios.post(
-        'http://localhost:6969/api/v1/signup',
+        'https://abilityex.onrender.com/api/v1/signup',
         formData
       );
       localStorage.setItem("AbilityExtoken", response.data.token);
