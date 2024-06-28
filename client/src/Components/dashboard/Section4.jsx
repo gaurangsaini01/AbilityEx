@@ -5,8 +5,8 @@ import { MdOutlineNavigateNext } from "react-icons/md";
 import ProfileCard from "./ProfileCard";
 function Section4() {
   return (
-    <div className="w-1/4 flex flex-col">
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 flex flex-col gap-2 p-6 rounded-xl">
+    <div className="lg:w-1/4 md:w-3/4 w-full md:mx-auto flex flex-col p-6 md:p-0">
+      <div className="bg-gradient-to-r from-blue-600  to-indigo-600 flex flex-col gap-2 p-6 rounded-xl">
         <RiRobot2Line size={55} color="white" />
         <h1 className="text-2xl font-bold text-white">Skill Coach</h1>
         <p className="text-[#ded5ff] ">

@@ -5,7 +5,7 @@ import { Line } from "rc-progress";
 
 function Section1({ user }) {
   return (
-    <div className="w-1/4  flex flex-col items-center mt-2 rounded-xl ">
+    <div className="lg:w-1/4 md:w-3/4 w-full md:mx-auto flex flex-col items-center mt-2 rounded-xl ">
       <div className="bg-gray-100 w-full ">
         <div className="flex items-center flex-col ">
           <div className="rounded-full overflow-hidden">
@@ -16,7 +16,7 @@ function Section1({ user }) {
             {user?.role || "IT Specialist"}
           </p>
         </div>
-        <div className="flex rounded-md justify-between mt-4">
+        <div className="flex rounded-md justify-between mt-4 p-4 md:p-2">
           {cardData.map((card, index) => (
             <Card
               index={index}

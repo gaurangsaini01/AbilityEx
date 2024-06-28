@@ -22,7 +22,7 @@ function Dashboard({ loginStatus, setLoginStatus }) {
       <div className=" w-11/12 mx-auto ">
         <Navbar user={user} setLoginStatus={setLoginStatus} />
       </div>
-      <div className="w-11/12 flex lg:flex-nowrap flex-wrap gap-6 mx-auto h-fit">
+      <div className="lg:w-11/12 w-full flex lg:flex-nowrap flex-wrap gap-6 mx-auto h-fit">
         <Section1 user={user} />
         <Section2 />
         <Section3 />

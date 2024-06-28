@@ -14,7 +14,7 @@ function SignupStep5({
     e.preventDefault();
     try {
       const response = await axios.post(
-        import.meta.env.VITE_SIGNUP_API,
+        'http://localhost:6969/api/v1/signup',
         formData
       );
       localStorage.setItem("AbilityExtoken", response.data.token);
