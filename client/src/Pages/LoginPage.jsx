@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LuEye } from "react-icons/lu";
 import { LuEyeOff } from "react-icons/lu";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-function LoginPage({setLoginStatus}) {
+function LoginPage({ loginStatus, setLoginStatus }) {
   const navigate = useNavigate();
+  useEffect(() => {
+    if (loginStatus) {
+      navigate("/dashboard");
+    }
+  });
   const [accountType, setAccountType] = useState("personal");
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -34,9 +39,11 @@ function LoginPage({setLoginStatus}) {
               password: formData.password,
               corporateName: formData.corporateName,
             });
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("AbilityExtoken", response.data.token);
+      localStorage.setItem("AbilityExuser", JSON.stringify(response.data.user));
+
       toast.success(response.data.message);
-      setLoginStatus(true)
+      setLoginStatus(true);
       navigate("/dashboard");
     } catch (err) {
       toast.error(err.response.data.message);
@@ -57,8 +64,8 @@ function LoginPage({setLoginStatus}) {
       <div className="lg:w-1/2 w-full flex items-center justify-center bg-[#f9fafa]">
         <div className="lg:w-[500px] w-[400px]">
           {/* logo */}
-          <div className="flex items-center ">
-            <div></div>
+          <div className="flex items-center gap-4">
+            <div><img src="/logo.png" width={60} alt="" /></div>
             <div className="flex flex-col">
               <h1 className="text-4xl font-bold">LOGIN</h1>
               <p className="text-gray-600">Hello , welcome back !</p>

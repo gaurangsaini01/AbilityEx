@@ -17,9 +17,13 @@ function SignupStep5({
         import.meta.env.VITE_SIGNUP_API,
         formData
       );
-      toast.success("Signup Successfull");
+      localStorage.setItem("AbilityExtoken", response.data.token);
+      localStorage.setItem("AbilityExuser", JSON.stringify(response.data.user));
+
+      toast.success(response.data.message);
+
+      setLoginStatus(true);
       navigate("/dashboard");
-      setLoginStatus(true)
     } catch (err) {
       toast.error(err.response.data.message);
     }

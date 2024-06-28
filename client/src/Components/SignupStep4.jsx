@@ -3,8 +3,6 @@ import { Button } from "@mui/material";
 function SignupStep4({
   handleBack,
   handleNext,
-  activeStep,
-  steps,
   formData,
   changeHandler,
 }) {
@@ -34,24 +32,21 @@ function SignupStep4({
           <option value="social">Social</option>
         </select>
         <div className="flex">
-          {activeStep !== 0 && (
-            <Button
-              variant="contained"
-              onClick={handleBack}
-              sx={{ mt: 1, mr: 1 }}
-            >
-              Back
-            </Button>
-          )}
-          {activeStep !== steps.length && (
-            <Button
-              variant="contained"
-              onClick={handleNext}
-              sx={{ mt: 1, mr: 1 }}
-            >
-              Continue
-            </Button>
-          )}
+          <Button
+            variant="contained"
+            onClick={handleBack}
+            sx={{ mt: 1, mr: 1 }}
+          >
+            Back
+          </Button>
+
+          <Button
+            variant="contained"
+            onClick={handleNext}
+            sx={{ mt: 1, mr: 1 }}
+          >
+            Continue
+          </Button>
         </div>
       </form>
     </div>

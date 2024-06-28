@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import StepContent from "@mui/material/StepContent";
+import { IoIosArrowBack } from "react-icons/io";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
@@ -12,6 +12,7 @@ import SignupStep2 from "../Components/SignupStep2";
 import SignupStep3 from "../Components/SignupStep3";
 import SignupStep4 from "../Components/SignupStep4";
 import SignupStep5 from "../Components/SignupStep5";
+import { useNavigate } from "react-router-dom";
 
 const steps = [
   {
@@ -31,8 +32,14 @@ const steps = [
   },
 ];
 
-function SignupPage({loginStatus,setLoginStatus}) {
- 
+function SignupPage({ loginStatus, setLoginStatus }) {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (loginStatus) {
+      navigate("/dashboard");
+    }
+  });
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -82,24 +89,18 @@ function SignupPage({loginStatus,setLoginStatus}) {
     <SignupStep2
       handleBack={handleBack}
       handleNext={handleNext}
-      activeStep={activeStep}
-      steps={steps}
       changeHandler={changeHandler}
       formData={formData}
     />,
     <SignupStep3
       handleBack={handleBack}
       handleNext={handleNext}
-      activeStep={activeStep}
-      steps={steps}
       changeHandler={changeHandler}
       formData={formData}
     />,
     <SignupStep4
       handleBack={handleBack}
       handleNext={handleNext}
-      activeStep={activeStep}
-      steps={steps}
       changeHandler={changeHandler}
       formData={formData}
     />,
@@ -122,6 +123,13 @@ function SignupPage({loginStatus,setLoginStatus}) {
       </div>
       <div className="lg:w-2/3 w-full flex flex-col items-center justify-center">
         <div>
+          <div
+            onClick={() => navigate("/")}
+            className="flex hover:cursor-pointer font-semibold text-blue-400 items-center gap-1"
+          >
+            <IoIosArrowBack />
+            Back to Login
+          </div>
           <h1 className="font-bold text-4xl my-6">Signup</h1>
           <div className="flex md:w-[700px] w-fit h-[500px] rounded-xl bg-white shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px]">
             <div className="md:w-1/3 md:block hidden p-4 ">

@@ -3,8 +3,6 @@ import { Button } from "@mui/material";
 function SignupStep2({
   handleBack,
   handleNext,
-  activeStep,
-  steps,
   formData,
   changeHandler,
 }) {
@@ -23,8 +21,8 @@ function SignupStep2({
           >
             EMPLOYEE NUMBER
           </label>
-          <input 
-          value={formData.employeeNumber}
+          <input
+            value={formData.employeeNumber}
             onChange={changeHandler}
             autoComplete="off"
             type="number"
@@ -40,7 +38,8 @@ function SignupStep2({
           >
             CORPORATE NAME
           </label>
-          <input value={formData.corporateName}
+          <input
+            value={formData.corporateName}
             onChange={changeHandler}
             autoComplete="off"
             type="text"
@@ -56,7 +55,8 @@ function SignupStep2({
           >
             Department
           </label>
-          <input value={formData.department}
+          <input
+            value={formData.department}
             onChange={changeHandler}
             autoComplete="off"
             type="text"
@@ -72,7 +72,8 @@ function SignupStep2({
           >
             ROLE
           </label>
-          <input value={formData.role}
+          <input
+            value={formData.role}
             onChange={changeHandler}
             autoComplete="off"
             type="text"
@@ -82,24 +83,21 @@ function SignupStep2({
           />
         </div>
         <div className="flex">
-          {activeStep !== 0 && (
-            <Button
-              variant="contained"
-              onClick={handleBack}
-              sx={{ mt: 1, mr: 1 }}
-            >
-              Back
-            </Button>
-          )}
-          {activeStep !== steps.length && (
-            <Button
-              variant="contained"
-              onClick={handleNext}
-              sx={{ mt: 1, mr: 1 }}
-            >
-              Continue
-            </Button>
-          )}
+          <Button
+            variant="contained"
+            onClick={handleBack}
+            sx={{ mt: 1, mr: 1 }}
+          >
+            Back
+          </Button>
+
+          <Button
+            variant="contained"
+            onClick={handleNext}
+            sx={{ mt: 1, mr: 1 }}
+          >
+            Continue
+          </Button>
         </div>
       </form>
     </div>

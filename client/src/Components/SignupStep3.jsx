@@ -3,8 +3,6 @@ import { Button } from "@mui/material";
 function SignupStep3({
   handleBack,
   handleNext,
-  activeStep,
-  steps,
   formData,
   changeHandler,
 }) {
@@ -23,7 +21,8 @@ function SignupStep3({
           >
             LINE MANAGER NAME
           </label>
-          <input value={formData.lineManagerName}
+          <input
+            value={formData.lineManagerName}
             onChange={changeHandler}
             autoComplete="off"
             type="text"
@@ -39,7 +38,8 @@ function SignupStep3({
           >
             LINE MANAGER EMAIL
           </label>
-          <input value={formData.lineManagerEmail}
+          <input
+            value={formData.lineManagerEmail}
             autoComplete="off"
             type="email"
             id="lineManagerEmail"
@@ -55,7 +55,8 @@ function SignupStep3({
           >
             PHONE NUMBER
           </label>
-          <input value={formData.phoneNumber}
+          <input
+            value={formData.phoneNumber}
             onChange={changeHandler}
             autoComplete="off"
             type="number"
@@ -65,24 +66,21 @@ function SignupStep3({
           />
         </div>
         <div className="flex">
-          {activeStep !== 0 && (
-            <Button
-              variant="contained"
-              onClick={handleBack}
-              sx={{ mt: 1, mr: 1 }}
-            >
-              Back
-            </Button>
-          )}
-          {activeStep !== steps.length && (
-            <Button
-              variant="contained"
-              onClick={handleNext}
-              sx={{ mt: 1, mr: 1 }}
-            >
-              Continue
-            </Button>
-          )}
+          <Button
+            variant="contained"
+            onClick={handleBack}
+            sx={{ mt: 1, mr: 1 }}
+          >
+            Back
+          </Button>
+
+          <Button
+            variant="contained"
+            onClick={handleNext}
+            sx={{ mt: 1, mr: 1 }}
+          >
+            Continue
+          </Button>
         </div>
       </form>
     </div>
