@@ -18,15 +18,15 @@ function Dashboard({ loginStatus, setLoginStatus }) {
   }, []);
 
   return (
-    <div className="flex flex-col bg-gray-100">
-      <div className=" w-11/12 mx-auto">
+    <div className="flex flex-col bg-gray-100 pb-10 ">
+      <div className=" w-11/12 mx-auto ">
         <Navbar user={user} setLoginStatus={setLoginStatus} />
       </div>
-      <div className="w-11/12 flex gap-6 mx-auto h-screen">
-       <Section1 user={user}/>
-        <Section2/>
+      <div className="w-11/12 flex lg:flex-nowrap flex-wrap gap-6 mx-auto h-fit">
+        <Section1 user={user} />
+        <Section2 />
         <Section3 />
-        <Section4/>
+        <Section4 />
       </div>
     </div>
   );

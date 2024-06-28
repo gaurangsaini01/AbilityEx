@@ -8,7 +8,7 @@ import "react-circular-progressbar/dist/styles.css";
 function Section2() {
   return (
     <div className="w-1/4 flex flex-col overflow-hidden rounded-xl items-center ">
-      <div className="rounded-2xl overflow-hidden">
+      <div className="rounded-2xl mb-3 overflow-hidden">
         <div className="bg-white w-full p-4 ">
           <div className="flex justify-between items-center">
             <h3 className="text-gray-600">Projects In Progress(6)</h3>

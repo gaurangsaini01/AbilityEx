@@ -12,13 +12,13 @@ function Section3() {
           </div>
           <div className="w-[30px] border-2 mt-2 border-blue-500"></div>
         </div>
-        <div className="px-4 mb-4 w-full flex flex-col gap-4">
+        <div className="px-4 w-full flex flex-col gap-4">
           <Certificate />
           <Certificate />
           <Certificate />
         </div>
       </div>
-      <div className="rounded-md overflow-hidden mt-10">
+      <div className="rounded-md overflow-hidden mt-6">
         <img
           src="/Rating.png"
           className="w-full h-full object-contain"
